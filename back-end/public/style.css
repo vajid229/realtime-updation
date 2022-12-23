@@ -26,7 +26,7 @@ display: grid;
 
 .b{
     height: auto;
-    width: auto;
+    width: 100px;
     margin: 10px;
     background-color: rgb(177, 16, 16);
 
@@ -49,7 +49,6 @@ height: 100px;
 width: 100px;
 background-color: cadetblue;
 align-self:center;
-margin-left: 200px;
 cursor: pointer;
 
 }
