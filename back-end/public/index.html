@@ -1,57 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>real-time-game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="container" class="container">
-        <div id="progbar" class="prg">
-            <div class="b" id="bar1"></div>
-            <div class="b" id="bar2"></div>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>real-time-game</title>
+		<link rel="stylesheet" href="style.css" />
+    <script src="/socket.io/socket.io.js"></script>
 
-        </div>
-
-
-
-    </div>
-<div id="cont2">
-    <div class="butt" id="us1">user1</div>
-    <div class="butt" id="us2">user2</div>
-
-</div>
+	</head>
+	<body>
+		<div id="container" class="container">
+			<div id="progbar" class="prg">
+				<div class="b" id="bar1"></div>
+				<div class="b" id="bar2"></div>
+			</div>
+		</div>
+		<div id="cont2">
+			<div class="butt" id="us1">user1</div>
+			<div class="butt" id="us2">user2</div>
+		</div>
+	</body>
 
 
+    <script>
+        var socket = io();
+  
+        var bar1 = document.getElementById('bar1');
+        var bar2 = document.getElementById('bar2');
+        
 
-</body>
+        var count= 0 
 
+        bar1.onclick('click', function() {
 
+         bar1.style.width = `${count+= 5}px`
+            var data = bar1.style.width
+          socket.emit('bar1',data )
+        });
 
+        bar2.onclick('click', function() {
+            
+         bar2.style.width = `${count+= 5}px`
+            var data = bar2.style.width
+        socket.emit('bar2',data)
+        });
+  
+  
+        socket.on('bar1', function(msg) {
+          bar1.style.width = msg
+        });
 
-<script>
-
-var bar1= document.getElementById("bar1");
-var bar2 = document.getElementById("bar2");
-var butt1 = document.getElementById("us1")
-var butt2 = document.getElementById("us2")
-var count = 0
-
-
-butt1.onclick =function(){
-
-bar1.style.width = `${count+=10}px`
-}
-
-butt2.onclick =function(){
-
-bar2.style.width = `${count+=10}px`
-}
-
-
-
-</script>
-
+        socket.on('bar2',function(msg){
+            bar2.style.width = msg
+        })
+      </script>
 </html>
